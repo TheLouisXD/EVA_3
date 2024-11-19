@@ -1,13 +1,12 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="ps-3">
         <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/logo.jpg' %}" alt="Logo" width="50" height="50"></a>
     </div>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="{% url 'read_reserva' %}">Reservas</a>
-            <a class="nav-item nav-link" href="{% url 'read_mesa' %}">Mesas</a>
-            <a class="nav-item nav-link" href="{% url 'read_cliente' %}">Clientes</a>
+            <a class="nav-item nav-link" href="{% url 'create' %}">Crear Cliente</a>
+            <a class="nav-item nav-link" href="{% url 'read' %}">Ver Clientes</a>
             <a class="nav-item nav-link" href="{% static 'img/secreto.gif' %}"> secreto</a>
         </div>
     </div>
