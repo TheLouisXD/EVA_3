@@ -35,9 +35,9 @@
                                 <label for="apellido" class="form-label">Genero</label>
                                 <select class="form-select" id="genero" name="genero" required>
                                     <option value="{{ cliente.genero }}">{{ cliente.genero }}</option>
-                                    {% for genero in generos %}
-                                        <option value="{{ genero }} " {% if cliente.genero == genero %}selected{% endif %}>{{ genero }}</option>
-                                    {% endfor %}
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                        <option value="Desconocido">Desconocido</option>
                                 </select>
                             </div>
 
@@ -50,9 +50,8 @@
                                 <label for="activo" class="form-label">Activo</label>
                                 <select class="form-select" id="activo" name="activo" required>
                                     <option value="{{ cliente.activo }}">{{ cliente.activo }}</option>
-                                    {% for activo in activos %}
-                                        <option value="{{ activo }}">{{ activo }}</option>
-                                    {% endfor %}
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
                                 </select>
                             </div>
 
@@ -60,9 +59,11 @@
                                 <label for="nivel_de_satisfaccion" class="form-label">Nivel de Satisfaccion</label>
                                 <select class="form-select" id="nivel_de_satisfaccion" name="nivel_de_satisfaccion" required>
                                     <option value="{{ cliente.nivel_de_satisfaccion }}">{{ cliente.nivel_de_satisfaccion }}</option>
-                                    {% for nivel in niveles %}
-                                        <option value="{{ nivel }}">{{ nivel }}</option>
-                                    {% endfor %}
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
                                 </select>
 
                             <div class="d-grid gap-2">
