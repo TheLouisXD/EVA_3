@@ -16,7 +16,31 @@
 
     <!-- Contenido -->
     <div class="container mt-5">
-      Hola profesor
+        <h1>Bienvenido al sistema de gestion de clientes</h1>
+        <hr>
+        <div class="row">
+          {% comment %} Cartas de estadisticas {% endcomment %}
+          <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header"><h5 class="card-title">Clientes</h5></div>
+              <div class="card-body">
+                <p class="card-text">Total: {{ cliente.count }}</p>
+                <p class="card-text">Activos: {{ total_activos }}</p>
+                <p class="card-text">Inactivos: {{ total_inactivos }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Promedio de Satisfacción</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ promedio_satisfaccion }}</h5>
+                    <p class="card-text">El promedio de satisfaccion general</p>
+                </div>
+            </div>
+          </div>
+          
     </div>
     
     <!-- Bootstrap Bundle with Popper -->

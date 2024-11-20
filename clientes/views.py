@@ -3,6 +3,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import render, redirect
 from .models import Cliente
 from .serializer import ClienteSerializer
+from django.db.models import Avg
 
 # Create your views here.
 class ClienteViewSet(viewsets.ModelViewSet):
@@ -12,7 +13,13 @@ class ClienteViewSet(viewsets.ModelViewSet):
     filterset_fields = ['cliente_id', 'edad', 'genero', 'saldo', 'activo', 'nivel_de_satisfaccion']
 
 def index(request):
-    return render(request, 'index.html')
+    cliente = Cliente.objects.all()
+
+    total_activos = Cliente.objects.filter(activo='Si').count()
+    total_inactivos = Cliente.objects.filter(activo='No').count()
+    promedio_satisfaccion = int(Cliente.objects.aggregate(Avg('nivel_de_satisfaccion'))['nivel_de_satisfaccion__avg'])
+
+    return render(request, 'index.html', {'cliente': cliente, 'total_activos': total_activos, 'total_inactivos': total_inactivos, 'promedio_satisfaccion': promedio_satisfaccion})
 
 def cliente_list(request):
     clientes = Cliente.objects.all()
