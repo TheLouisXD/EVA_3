@@ -7,9 +7,11 @@ function ClienteDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
+    // filtros por cliente
     edad: '',
     genero: '',
-    nivel_de_satisfaccion: ''
+    nivel_de_satisfaccion: '',
+    activo: '' 
   });
 
   const fetchClientes = async () => {
@@ -58,7 +60,9 @@ function ClienteDashboard() {
         <h1 className="text-2xl font-bold mb-6 text-gray-800">Dashboard de Clientes</h1>
         
         {/* Filtros */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+        {/* Filtros por cliente */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <input
             type="number"
             placeholder="Filtrar por edad"
@@ -66,6 +70,8 @@ function ClienteDashboard() {
             value={filters.edad}
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+
+          {/* Filtros por género */}
           <select
             value={filters.genero}
             onChange={(e) => handleFilterChange('genero', e.target.value)}
@@ -76,6 +82,19 @@ function ClienteDashboard() {
             <option value="Femenino">Femenino</option>
             <option value="Desconocido">Desconocido</option>
           </select>
+
+          {/* Filtros por estado de actividad */}
+          <select
+            value={filters.activo}
+            onChange={(e) => handleFilterChange('activo', e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Todos los estados</option>
+            <option value="Si">Activos</option>
+            <option value="No">Inactivos</option>
+          </select>
+
+          {/* Filtros por nivel de satisfacción */}
           <select
             value={filters.nivel_de_satisfaccion}
             onChange={(e) => handleFilterChange('nivel_de_satisfaccion', e.target.value)}
@@ -89,6 +108,35 @@ function ClienteDashboard() {
             <option value="5">Nivel 5</option>
           </select>
         </div>
+
+        {/* Estadiscticas genereales de la base de datos */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <h3 className="text-sm font-medium text-blue-800">Total Clientes</h3>
+            <p className="text-2xl font-bold text-blue-900">{clientes.length}</p>
+          </div>
+          <div className="bg-green-50 p-4 rounded-lg">
+            <h3 className="text-sm font-medium text-green-800">Clientes Activos</h3>
+            <p className="text-2xl font-bold text-green-900">
+              {clientes.filter(c => c.activo === 'Si').length}
+            </p>
+          </div>
+          <div className="bg-red-50 p-4 rounded-lg">
+            <h3 className="text-sm font-medium text-red-800">Clientes Inactivos</h3>
+            <p className="text-2xl font-bold text-red-900">
+              {clientes.filter(c => c.activo === 'No').length}
+            </p>
+          </div>
+          <div className="bg-purple-50 p-4 rounded-lg">
+            <h3 className="text-sm font-medium text-purple-800">Satisfacción Promedio</h3>
+            <p className="text-2xl font-bold text-purple-900">
+              {clientes.length > 0 
+                ? (clientes.reduce((acc, c) => acc + parseInt(c.nivel_de_satisfaccion), 0) / clientes.length).toFixed(1)
+                : '0'}
+            </p>
+          </div>
+        </div>
+
 
         {/* Tabla */}
         <div className="overflow-x-auto bg-white rounded-lg">
