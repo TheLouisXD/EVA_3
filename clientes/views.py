@@ -46,8 +46,8 @@ def cliente_create(request):
                 nivel_de_satisfaccion=nivel_de_satisfaccion
             )
 
-            # Redireccionar al formulario de creación
-            return redirect('read.html')
+            # Redireccionar al listado
+            return redirect('read')
         
         # Si no se pudo crear el cliente, redirigir al formulario de creación
         except Exception as e:
@@ -78,10 +78,10 @@ def editar_cliente(request, pk):
             cliente.save()
 
             # Redireccionar al listado
-            return redirect('read.html')
+            return redirect('read')
         except Exception as e:
             print(e)
-            return redirect('update.html')
+            return redirect('update')
     
     return render(request, 'update.html', {'cliente': cliente})
 
