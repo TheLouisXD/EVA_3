@@ -15,12 +15,15 @@ class ClienteViewSet(viewsets.ModelViewSet):
 def index(request):
     cliente = Cliente.objects.all()
 
+    # Calculamos estadísticas
     total_activos = Cliente.objects.filter(activo='Si').count()
     total_inactivos = Cliente.objects.filter(activo='No').count()
     promedio_satisfaccion = int(Cliente.objects.aggregate(Avg('nivel_de_satisfaccion'))['nivel_de_satisfaccion__avg'])
 
+    # Renderizamos la página de inicio con los dato obtenidos
     return render(request, 'index.html', {'cliente': cliente, 'total_activos': total_activos, 'total_inactivos': total_inactivos, 'promedio_satisfaccion': promedio_satisfaccion})
 
+# vista de listado de clientes
 def cliente_list(request):
     clientes = Cliente.objects.all()
     return render(request, 'read.html', {'clientes': clientes})
@@ -81,7 +84,7 @@ def editar_cliente(request, pk):
             return redirect('read')
         except Exception as e:
             print(e)
-            return redirect('update')
+            return redirect('update') # Redireccionar al formulario de actualización
     
     return render(request, 'update.html', {'cliente': cliente})
 

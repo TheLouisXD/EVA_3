@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register(r'clientes', ClienteViewSet)
 
 urlpatterns = [
+    # url para la API REST
     path('api/', include(router.urls)),
     path('', views.index, name='index'),
 

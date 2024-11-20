@@ -4,6 +4,7 @@ from django.db import models
 
 # Modelo para Clientes
 class Cliente(models.Model):
+    # Choices para el campo GENERO
     GENEROS =[
         ('Masculino', 'Masculino'),
         ('Femenino', 'Femenino'),

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+// URL de la API
 const API_URL = 'http://localhost';
 
 function ClienteDashboard() {
+  // Estado para almacenar los clientes, carga, error y filtros
   const [clientes, setClientes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,10 +16,12 @@ function ClienteDashboard() {
     activo: '' 
   });
 
+  // Función para obtener los clientes desde la API
   const fetchClientes = async () => {
     try {
       setLoading(true);
       let url = `${API_URL}/api/clientes/?`;
+      // Construcción de la URL con los filtros aplicados
       Object.keys(filters).forEach(key => {
         if (filters[key]) {
           url += `${key}=${filters[key]}&`;
@@ -35,10 +39,12 @@ function ClienteDashboard() {
     }
   };
 
+  // Efecto para cargar los clientes cuando cambian los filtros
   useEffect(() => {
     fetchClientes();
   }, [filters]);
 
+  // Manejo de cambios en los filtros
   const handleFilterChange = (name, value) => {
     setFilters(prev => ({
       ...prev,
@@ -46,6 +52,7 @@ function ClienteDashboard() {
     }));
   };
 
+  // Manejo de errores
   if (error) {
     return (
       <div className="p-4 text-red-500">
@@ -59,9 +66,7 @@ function ClienteDashboard() {
       <div className="bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-2xl font-bold mb-6 text-gray-800">Dashboard de Clientes</h1>
         
-        {/* Filtros */}
-
-        {/* Filtros por cliente */}
+        {/* Filtros para buscar clientes */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <input
             type="number"
@@ -71,7 +76,7 @@ function ClienteDashboard() {
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Filtros por género */}
+          {/* Filtro por género */}
           <select
             value={filters.genero}
             onChange={(e) => handleFilterChange('genero', e.target.value)}
@@ -83,7 +88,7 @@ function ClienteDashboard() {
             <option value="Desconocido">Desconocido</option>
           </select>
 
-          {/* Filtros por estado de actividad */}
+          {/* Filtro por estado de actividad */}
           <select
             value={filters.activo}
             onChange={(e) => handleFilterChange('activo', e.target.value)}
@@ -94,7 +99,7 @@ function ClienteDashboard() {
             <option value="No">Inactivos</option>
           </select>
 
-          {/* Filtros por nivel de satisfacción */}
+          {/* Filtro por nivel de satisfacción */}
           <select
             value={filters.nivel_de_satisfaccion}
             onChange={(e) => handleFilterChange('nivel_de_satisfaccion', e.target.value)}
@@ -109,7 +114,7 @@ function ClienteDashboard() {
           </select>
         </div>
 
-        {/* Estadiscticas genereales de la base de datos */}
+        {/* Estadísticas generales de la base de datos */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-blue-50 p-4 rounded-lg">
             <h3 className="text-sm font-medium text-blue-800">Total Clientes</h3>
@@ -137,8 +142,7 @@ function ClienteDashboard() {
           </div>
         </div>
 
-
-        {/* Tabla */}
+        {/* Tabla de clientes */}
         <div className="overflow-x-auto bg-white rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">

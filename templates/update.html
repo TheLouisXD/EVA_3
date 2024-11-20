@@ -35,9 +35,15 @@
                                 <label for="apellido" class="form-label">Genero</label>
                                 <select class="form-select" id="genero" name="genero" required>
                                     <option value="{{ cliente.genero }}">{{ cliente.genero }}</option>
+                                    {% if cliente.genero != "Masculino" %}
                                         <option value="Masculino">Masculino</option>
+                                    {% endif %}
+                                    {% if cliente.genero != "Femenino" %}
                                         <option value="Femenino">Femenino</option>
+                                    {% endif %}
+                                    {% if cliente.genero != "Desconocido" %}
                                         <option value="Desconocido">Desconocido</option>
+                                    {% endif %}
                                 </select>
                             </div>
 
@@ -50,8 +56,12 @@
                                 <label for="activo" class="form-label">Activo</label>
                                 <select class="form-select" id="activo" name="activo" required>
                                     <option value="{{ cliente.activo }}">{{ cliente.activo }}</option>
+                                    {% if cliente.activo != "Si" %}
                                         <option value="Si">Si</option>
+                                    {% endif %}
+                                    {% if cliente.activo != "No" %}
                                         <option value="No">No</option>
+                                    {% endif %}
                                 </select>
                             </div>
 
@@ -59,12 +69,13 @@
                                 <label for="nivel_de_satisfaccion" class="form-label">Nivel de Satisfaccion</label>
                                 <select class="form-select" id="nivel_de_satisfaccion" name="nivel_de_satisfaccion" required>
                                     <option value="{{ cliente.nivel_de_satisfaccion }}">{{ cliente.nivel_de_satisfaccion }}</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                    {% for i in "12345" %}
+                                        {% if cliente.nivel_de_satisfaccion != i %}
+                                            <option value="{{ i }}">{{ i }}</option>
+                                        {% endif %}
+                                    {% endfor %}
                                 </select>
+                            </div>
 
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
